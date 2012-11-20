@@ -26,7 +26,7 @@ Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-if ( !function_exists( 'add_action' ) ) {
+if(!function_exists('add_action')){
   echo "The Hipmob plugin: will not work when called directly.";
   exit;
 }
