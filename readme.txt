@@ -4,7 +4,7 @@ Donate link:
 Tags: live chat
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.1.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,9 @@ Yes! Hipmob live chat integrates with a growing number of tools you may already 
 2. Hipmob live chat settings page.
 
 == Changelog ==
+
+= 1.2.0 =
+* Added an option to have the live chat widget inserted into the head of the page, rather than at the end. This fixes issues with some Wordpress installations where an error in the theme prevents the wp_footer method from firing.
 
 = 1.1.1 =
 * Added an extra warning about cache plugins.
