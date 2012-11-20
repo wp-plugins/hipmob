@@ -4,7 +4,7 @@ Donate link:
 Tags: live chat
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,15 +27,27 @@ Learn more at [https://www.hipmob.com/documentation/integrations/wordpress.html]
 
 == Frequently asked questions ==
 
-= A question that someone might have =
+= Do I have to add any scripts to my server? =
 
-An answer to that question.
+No, Hipmob live chat is a hosted service: you only need to sign up for a free account at [https://manage.hipmob.com](https://manage.hipmob.com) and install the plugin. There is no additional installation required.
+
+= Is Hipmob live chat free? =
+
+There is a free plan available: learn more at [https://www.hipmob.com/pricing.html](https://www.hipmob.com/pricing.html). For high volume users there are also paid plans.
+
+= Does Hipmob hosted live chat integrate with anything else? =
+
+Yes! Hipmob live chat integrates with a growing number of tools you may already use (or want to use) such as Salesforce, Zendesk and Desk.com. Visit [https://www.hipmob.com/documentation/](https://www.hipmob.com/documentation/) for a complete list.
 
 == Screenshots ==
 
+[https://www.hipmob.com/documentation/integrations/img/wordpress/figure9.png](https://www.hipmob.com/documentation/integrations/img/wordpress/figure9.png)
+
+[https://www.hipmob.com/documentation/integrations/img/wordpress/figure8.png](https://www.hipmob.com/documentation/integrations/img/wordpress/figure8.png)
+
 == Changelog ==
 
-Initial release.
+Updated the documentation and added extra information to the help shown in the settings page.
 
 == Upgrade notice ==
 
