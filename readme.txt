@@ -8,7 +8,7 @@ Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add Hipmob hosted live chat to your Wordpress site: talk to your visitors and users, improve engagement, figure out what they want, and make them happy.
+Talk to your visitors/users, transform user support and increase sales and conversions. Make your visitors happy with Hipmob hosted live chat!
 
 == Description ==
 
