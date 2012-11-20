@@ -4,7 +4,7 @@ Donate link:
 Tags: live chat
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,12 +42,19 @@ Yes! Hipmob live chat integrates with a growing number of tools you may already 
 == Screenshots ==
 
 1. Hipmob live chat deployed on a website.
-
 2. Hipmob live chat settings page.
 
 == Changelog ==
 
-Updated the documentation and added extra information to the help shown in the settings page.
+= 1.1.1 =
+* Added an extra warning about cache plugins.
+
+= 1.1.0 =
+* Updated the documentation.
+* Added extra information to the help shown in the settings page.
+ 
+= 1.0.0 =
+* Initial release.
 
 == Upgrade notice ==
 

@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Hipmob
- * @version 1.1.0
+ * @version 1.1.1
  */
 /*
 Plugin Name: Hipmob
 Plugin URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 Description: Adds a Hipmob live chat tab to your website. Use the [hipmob_enabled] and [hipmob_disabled] shortcodes to control the display on each page.
 Author: Orthogonal Labs, Inc
-Version: 1.1.0
+Version: 1.1.1
 Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 */
 /*  Copyright 2012 Femi Omojola (email : femi@hipmob.com)
@@ -146,7 +146,7 @@ class HipmobPlugin
 
   function hipmob_plugin_section_overview()
   {
-    echo '<div>Configure the Hipmob Wordpress chat plugin by providing the application ID (from your Hipmob account) and customize the look and feel. Visit <a href="https://www.hipmob.com/documentation/integrations/wordpress.html" target="_blank">https://www.hipmob.com/documentation/integrations/wordpress.html</a> for more information.</div><div style="margin-top: 10px">Get your free Hipmob account at <a href="https://manage.hipmob.com/" target="_blank">https://manage.hipmob.com/</a>.</div>';
+    echo '<div>Configure the Hipmob Wordpress chat plugin by providing the application ID (from your Hipmob account) and customize the look and feel. Visit <a href="https://www.hipmob.com/documentation/integrations/wordpress.html" target="_blank">https://www.hipmob.com/documentation/integrations/wordpress.html</a> for more information.</div><div style="margin-top: 10px">Get your free Hipmob account at <a href="https://manage.hipmob.com/" target="_blank">https://manage.hipmob.com/</a>.</div><div style="margin-top: 10px"><strong>NOTE: if you use a cache plugin (such as WP Super Cache) you may need to clear your cache for changes to take effect.</strong></div>';
   }
 
   function hipmob_plugin_admin_menu()
