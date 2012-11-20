@@ -41,9 +41,9 @@ Yes! Hipmob live chat integrates with a growing number of tools you may already 
 
 == Screenshots ==
 
-[https://www.hipmob.com/documentation/integrations/img/wordpress/figure9.png](https://www.hipmob.com/documentation/integrations/img/wordpress/figure9.png)
+1. Hipmob live chat deployed on a website.
 
-[https://www.hipmob.com/documentation/integrations/img/wordpress/figure8.png](https://www.hipmob.com/documentation/integrations/img/wordpress/figure8.png)
+2. Hipmob live chat settings page.
 
 == Changelog ==
 
