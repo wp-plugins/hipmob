@@ -4,7 +4,7 @@ Donate link:
 Tags: live chat
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,9 +12,9 @@ Add Hipmob hosted live chat to your Wordpress site: talk to your visitors and us
 
 == Description ==
 
-Hipmob provides hosted live chat for your Wordpress site. You sign up with us, we give you a code, you install the Hipmob Wordpress plugin, activate it, and you can then talk to your users, figure out what they want and what problems they are having, and make them happy. No servers, no extra steps or code to write, wherever the users are, you get to focus on what you do well.
+Hipmob is a hosted live chat service for your Wordpress site. You can install, customize and activate our WordPress plugin with just a few clicks, and then you can talk to your visitors in real time: no servers or software to install. Whether you're an online store, a blogger or just providing customer support, Hipmob helps you convert more visitors into customers, up-sell customers to bigger orders, reduce abandoned carts, and solve problems quickly.
 
-Hipmob for Wordpress seamlessly integrates Hipmob hosted live chat into your Wordpress site, providing options for choosing which Hipmob app to use, the ability to position the chat tab, and simple control over the style and title text.
+Hipmob for Wordpress seamlessly integrates Hipmob hosted live chat into your Wordpress site, providing options for choosing which Hipmob app to use, the ability to position the chat tab, and simple control over the style and title text. Hipmob supports greeting and away messages, canned responses, and integration with popular CRM tools such as Highrise, Salesforce and Zoho CRM, as well as helpdesk tools like Zendesk and Desk.com.
 
 Learn more at [https://www.hipmob.com/documentation/integrations/wordpress.html](https://www.hipmob.com/documentation/integrations/wordpress.html).
 
