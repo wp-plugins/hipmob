@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Hipmob
- * @version 1.3.0
+ * @version 1.3.1
  */
 /*
 Plugin Name: Hipmob
 Plugin URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 Description: Adds a Hipmob live chat tab to your website. Use the [hipmob_enabled] and [hipmob_disabled] shortcodes to control the display on each page.
 Author: Orthogonal Labs, Inc
-Version: 1.3.0
+Version: 1.3.1
 Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 */
 /*  Copyright 2012 Femi Omojola (email : femi@hipmob.com)
@@ -31,7 +31,7 @@ if(!function_exists('add_action')){
   exit;
 }
 
-define('HIPMOB_FOR_WORDPRESS_VERSION', '1.3.0');
+define('HIPMOB_FOR_WORDPRESS_VERSION', '1.3.1');
 
 class HipmobPlugin
 {
@@ -227,7 +227,7 @@ class HipmobPlugin
     if(!self::$admin) return;
 
     // add the admin chat tab
-    echo "<script type=\"text/javascript\">var _hmc = _hmc || [];_hmc.push(['app', '9e0306c589ed413bb3c0e12a7ea7591c']);_hmc.push(['settings', { 'width': '350px' }]);_hmc.push(['title', \"Help me with my Hipmob integration\"]);(function(){ var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true; hm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'hipmob.s3.amazonaws.com/hipmobchat.min.js'; var b = document.getElementsByTagName('script')[0]; b.parentNode.insertBefore(hm, b); })();</script>";
+    echo "<script type=\"text/javascript\">var _hmc = _hmc || [];_hmc.push(['app', '9e0306c589ed413bb3c0e12a7ea7591c']);_hmc.push(['settings', { 'width': '350px', 'open': true }]);_hmc.push(['title', \"Help me with my Hipmob integration\"]);(function(){ var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true; hm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'hipmob.s3.amazonaws.com/hipmobchat.min.js'; var b = document.getElementsByTagName('script')[0]; b.parentNode.insertBefore(hm, b); })();</script>";
   }
 }
 
