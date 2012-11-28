@@ -4,7 +4,7 @@ Donate link:
 Tags: live chat, admin, administration, Chat, control, custom, edit, plugin, profile, panel, interface, wordpress, help, support, widget, operator, mobile, jabber, xmpp, imo, instantbird, adium, ichat, pidgin, xabber, live help, live support, social, chat bot, notification, salesforce, zendesk, desk.com, highrise, zoho, customer support, campfire, hipchat, parse, mailchimp, square space, weebly, bot, iphone, android, facebook, customer help, analytics, email, happiness, happy visitors, happy customers, increase sales, conversions, jquery, customer retention, php, python, nodejs, commerce, black friday, cyber monday, ipad, business, api, ruby, java
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
