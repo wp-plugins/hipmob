@@ -1,7 +1,7 @@
 === Hipmob ===
 Contributors: hipmob
 Donate link: 
-Tags: live chat, admin, administration, Chat, control, custom, edit, plugin, profile, panel, interface, wordpress, help, support, widget, operator, mobile, jabber, xmpp, imo, instantbird, adium, ichat, pidgin, xabber, live help, live support, social, chat bot, notification, salesforce, zendesk, desk.com, highrise, zoho, customer support, campfire, hipchat, parse, mailchimp, square space, weebly, bot, iphone, android, facebook, customer help, analytics, email, happiness, happy visitors, happy customers, increase sales, conversions, jquery, customer retention, php, python, nodejs, commerce, black friday, cyber monday, ipad, business, api, ruby, java
+Tags: live chat, admin, administration, Chat, control, custom, edit, plugin, profile, panel, interface, wordpress, help, support, widget, operator, mobile, jabber, xmpp, imo, instantbird, adium, ichat, pidgin, xabber, live help, live support, social, chat bot, notification, salesforce, zendesk, desk.com, highrise, zoho, customer support, campfire, hipchat, parse, mailchimp, square space, weebly, bot, iphone, android, facebook, customer help, analytics, email, happiness, happy visitors, happy customers, increase sales, conversions, jquery, customer retention, php, python, nodejs, commerce, black friday, cyber monday, ipad, business, api, ruby, java, hosted, helpdesk, help, leads, crm, visitor tracking, social, talk, messaging, e-commerce, mobile-commerce, live chat service, wordpress chat, wordpress help, chat plugin, site chat, help chat, IM, contact us, user feedback, web help, help tickets, chat tab, visitor stats, visitor tracking, customer stats, customer tracking, visitor chat, customer chat
 Requires at least: 3.0
 Tested up to: 3.4
 Stable tag: 1.3.1
@@ -12,9 +12,44 @@ Talk to your visitors/users, transform user support and increase sales and conve
 
 == Description ==
 
-Hipmob is a hosted live chat service for your Wordpress site. You can install, customize and activate our WordPress plugin with just a few clicks, and then you can talk to your visitors in real time: no servers or software to install. Whether you're an online store, a blogger or just providing customer support, Hipmob helps you convert more visitors into customers, up-sell customers to bigger orders, reduce abandoned carts, and solve problems quickly.
+Hipmob is the fastest live chat service for your Wordpress site. Talk to your visitors in real time using hosted live chat!
 
-Hipmob for Wordpress seamlessly integrates Hipmob hosted live chat into your Wordpress site, providing options for choosing which Hipmob app to use, the ability to position the chat tab, and simple control over the style and title text. Hipmob supports greeting and away messages, canned responses, and integration with popular CRM tools such as Highrise, Salesforce and Zoho CRM, as well as helpdesk tools like Zendesk and Desk.com.
+You can install, customize and activate the Hipmob for WordPress plugin with just a few clicks; no servers or software to install. 
+
+Here's the installation guide (complete with pictures): http://www.hipmob.com/documentation/integrations/wordpress.html 
+
+Hipmob is great if you are:
+
+- an online store looking to increase sales or get more feedback
+- a blogger who wants to talk to your audience
+- providing a service and want to provide great customer support
+- looking to turn visitors into customers
+- looking to up-sell customers to bigger orders
+- reducing abandoned carts
+
+Hipmob's live chat service comes with a ton of features, including:
+
+- Works with all browsers Internet Explorer, Firefox, Chrome, Opera and Safari
+- Works on mobile browsers as well
+- SDKs for your iPhone app, Android app or iPad app
+- Integrates with Mailchimp if you want to send newsletters
+- Integrates with Helpdesk systems like Zendesk and Desk.com
+- Plugs into CRM tools like Highrise by 37Signals, Zoho CRM, and Salesforce
+- Sends notifications to your collaboration tools like Hipchat and Campfire
+- Set greetings, canned messages, away messages and help messages
+- Has a REST API for developers, in PHP, Python and Node.JS
+- Chat from your favorite XMPP Instant Messenger, including Adium, Pidgin, Instantbird, iChat, iMessage, and IMO
+- Chat from your mobile phone! Using the IMO instant messaging client.
+- Email to reply to customers who are away
+- Analytics right in your Google Analytics or Mixpanel Account
+- Easy to customize the UI
+- Manage multiple sites
+- See visitors on your site in real time
+- Send proactive chat messages
+- Send images and audio files
+- Direct users to specific URLs. 
+- Reliable and Secure
+- See a full list of features at www.hipmob.com!
 
 Learn more at [https://www.hipmob.com/documentation/integrations/wordpress.html](https://www.hipmob.com/documentation/integrations/wordpress.html).
 
@@ -46,6 +81,9 @@ Yes! Hipmob live chat integrates with a growing number of tools you may already 
 
 == Changelog ==
 
+= 1.4.0 =
+Updated the readme and added additional help to the settings page.
+
 = 1.3.1 =
 Made the chat window default to open.
 
@@ -66,6 +104,7 @@ Updated the help documentation that shows in the plugin.
 * Initial release.
 
 == Upgrade notice ==
+
 
 
 

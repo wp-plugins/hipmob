@@ -121,7 +121,7 @@ class HipmobPlugin
 
   function hipmob_plugin_settings_app_id()
   {
-    echo '<input style="width: 300px" name="hipmob_app_id" id="id_hipmob_app_id" type="text" value="'. get_option('hipmob_app_id') . '" />';
+    echo '<input style="width: 240px" name="hipmob_app_id" id="id_hipmob_app_id" type="text" value="'. get_option('hipmob_app_id') . '" />&nbsp;&nbsp;<a class="button" href="https://manage.hipmob.com/#apps" target="_blank">Get your Hipmob app ID</a></div>';
   }
 
   function hipmob_plugin_settings_title()
@@ -157,7 +157,15 @@ class HipmobPlugin
 
   function hipmob_plugin_section_overview()
   {
-    echo '<div>Configure the Hipmob Wordpress chat plugin by providing the application ID (from your Hipmob account) and customize the look and feel. Visit <a href="https://www.hipmob.com/documentation/integrations/wordpress.html" target="_blank">https://www.hipmob.com/documentation/integrations/wordpress.html</a> for more information.</div><div style="margin-top: 10px">Connects to popular CRM tools like Highrise, Salesforce and Zoho CRM to drive sales and conversions.</div><div style="margin-top: 10px">Get your free Hipmob account at <a href="https://manage.hipmob.com/" target="_blank">https://manage.hipmob.com/</a>.</div><div style="margin-top: 10px"><strong>NOTE: if you use a cache plugin (such as WP Super Cache) you may need to clear your cache for changes to take effect.</strong></div>';
+    echo '<div><h3>Instructions:</h3><ol>';
+    echo '<li><a class="button-primary" href="https://manage.hipmob.com/" target="_blank">Get your free Hipmob account</a> Get started: get your free Hipmob account.</li>';
+    echo '<li>Once you get your account, copy the application ID from your account into the Application ID field below.</li>';
+    echo '<li><a class="button" target="_blank" href="https://www.hipmob.com/operator#im">See instructions to talk to your visitors</a> Use any Jabber/XMPP client to talk to your visitors.</li></ol></div>';
+    echo '<div style="margin-top: 10px">Customize your chat widget: visit <a href="https://www.hipmob.com/documentation/integrations/wordpress.html" target="_blank">https://www.hipmob.com/documentation/integrations/wordpress.html</a> for more information.</div>';
+
+    echo '<div style="margin-top: 10px">Connects to popular CRM tools like Highrise, Salesforce and Zoho CRM to drive sales and conversions.</div>';
+
+    echo '<div style="margin-top: 10px"><strong>NOTE: if you use a cache plugin (such as WP Super Cache) you may need to clear your cache for changes to take effect.</strong></div>';
   }
 
   function hipmob_plugin_admin_menu()
@@ -225,9 +233,12 @@ class HipmobPlugin
   function hipmob_plugin_add_help_chat()
   {
     if(!self::$admin) return;
-
+    global $userdata;
+    get_currentuserinfo();
+    
     // add the admin chat tab
-    echo "<script type=\"text/javascript\">var _hmc = _hmc || [];_hmc.push(['app', '9e0306c589ed413bb3c0e12a7ea7591c']);_hmc.push(['settings', { 'width': '350px', 'open': true }]);_hmc.push(['title', \"Help me with my Hipmob integration\"]);(function(){ var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true; hm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'hipmob.s3.amazonaws.com/hipmobchat.min.js'; var b = document.getElementsByTagName('script')[0]; b.parentNode.insertBefore(hm, b); })();</script>";
+    $name = $userdata->display_name . " (".$userdata->user_login.")";
+    echo "<script type=\"text/javascript\">var _hmc = _hmc || [];_hmc.push(['app', '9e0306c589ed413bb3c0e12a7ea7591c']);_hmc.push(['settings', { 'width': '350px', 'openonmessage': true }]);_hmc.push(['title', \"Help me with my Hipmob integration\"]);_hmc.push(['email',".json_encode(get_option('admin_email'))."]);_hmc.push(['name',".json_encode($name)."]);_hmc.push(['context', ".json_encode("Blog Name: ". get_option("blogname").";Blog URL: ". get_option("siteurl"))."]);(function(){ var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true; hm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'hipmob.s3.amazonaws.com/hipmobchat.min.js'; var b = document.getElementsByTagName('script')[0]; b.parentNode.insertBefore(hm, b); })();</script>";
   }
 }
 
