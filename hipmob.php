@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Hipmob
- * @version 1.3.1
+ * @version 1.4.0
  */
 /*
 Plugin Name: Hipmob
 Plugin URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 Description: Adds a Hipmob live chat tab to your website. Use the [hipmob_enabled] and [hipmob_disabled] shortcodes to control the display on each page.
 Author: Orthogonal Labs, Inc
-Version: 1.3.1
+Version: 1.4.0
 Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 */
 /*  Copyright 2012 Femi Omojola (email : femi@hipmob.com)
@@ -31,7 +31,7 @@ if(!function_exists('add_action')){
   exit;
 }
 
-define('HIPMOB_FOR_WORDPRESS_VERSION', '1.3.1');
+define('HIPMOB_FOR_WORDPRESS_VERSION', '1.4.0');
 
 class HipmobPlugin
 {
