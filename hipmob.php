@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Hipmob
- * @version 1.0.0
+ * @version 1.4.0
  */
 /*
 Plugin Name: Hipmob
 Plugin URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 Description: Adds a Hipmob live chat tab to your website. Use the [hipmob_enabled] and [hipmob_disabled] shortcodes to control the display on each page.
 Author: Orthogonal Labs, Inc
-Version: 1.0.0
+Version: 1.4.0
 Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 */
 /*  Copyright 2012 Femi Omojola (email : femi@hipmob.com)
@@ -26,17 +26,18 @@ Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-if ( !function_exists( 'add_action' ) ) {
+if(!function_exists('add_action')){
   echo "The Hipmob plugin: will not work when called directly.";
   exit;
 }
 
-define('HIPMOB_FOR_WORDPRESS_VERSION', '1.0.0');
+define('HIPMOB_FOR_WORDPRESS_VERSION', '1.4.0');
 
 class HipmobPlugin
 {
   static $active = false;
   static $admin = false;
+  static $output_top = false;
 
   function hipmob_plugin_init()
   {
@@ -49,13 +50,16 @@ class HipmobPlugin
     add_option('hipmob_window_background_color');
     add_option('hipmob_window_text_color');
     add_option('hipmob_tab_position');
+    add_option('hipmob_output_position');
 
     // add us to the footer
-    add_action('wp_footer', array(__CLASS__, "hipmob_plugin_add_chat_tab"), 100);
+    add_action('wp_footer', array(__CLASS__, "hipmob_plugin_add_chat_tab_footer"), 100);
+    add_action('wp_head', array(__CLASS__, "hipmob_plugin_add_chat_tab_header"), 100);
     
     // see if we're enabled
     if(get_option("hipmob_enabled")) self::$active = true;
-    
+    if(get_option("hipmob_output_position")) self::$output_top = true;
+
     // and add us to the menus if we should be enabled
     if((function_exists('current_user_can') && current_user_can('manage_options')) || 
        (function_exists('is_admin') && is_admin())){
@@ -92,6 +96,7 @@ class HipmobPlugin
     add_settings_field('hipmob_tab_background_color', 'Tab Background Color', array(__CLASS__, 'hipmob_plugin_settings_tab_background_color'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_tab_text_color', 'Tab Text Color', array(__CLASS__, 'hipmob_plugin_settings_tab_text_color'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_tab_position', 'Tab Position', array(__CLASS__, 'hipmob_plugin_settings_tab_position'), 'hipmob-settings-group', 'hipmob_settings_section');
+    add_settings_field('hipmob_output_position', 'Add Widget to Page Header', array(__CLASS__, 'hipmob_plugin_settings_output_position'), 'hipmob-settings-group', 'hipmob_settings_section');
 
     register_setting('hipmob-settings-group', 'hipmob_enabled');
     register_setting('hipmob-settings-group', 'hipmob_app_id');
@@ -101,6 +106,7 @@ class HipmobPlugin
     register_setting('hipmob-settings-group', 'hipmob_tab_background_color');
     register_setting('hipmob-settings-group', 'hipmob_tab_text_color');
     register_setting('hipmob-settings-group', 'hipmob_tab_position');
+    register_setting('hipmob-settings-group', 'hipmob_output_position');
   }
   
   function hipmob_plugin_settings_enabled()
@@ -108,9 +114,14 @@ class HipmobPlugin
     echo '<input name="hipmob_enabled" id="id_hipmob_enabled" type="checkbox" value="true" '. checked("true", get_option('hipmob_enabled'), false) .' /> Enable Hipmob live chat on all pages by default';
   }
 
+  function hipmob_plugin_settings_output_position()
+  {
+    echo '<input name="hipmob_output_position" id="id_hipmob_output_position" type="checkbox" value="true" '. checked("true", get_option('hipmob_output_position'), false) .' /> Add the Hipmob live chat widget to the &lt;head&gt; of the page (by default the live chat widget is added just before the closing &lt;body&gt; tag): this can fix certain theme errors that prevent the Hipmob live chat widget from appearing';
+  }
+
   function hipmob_plugin_settings_app_id()
   {
-    echo '<input style="width: 300px" name="hipmob_app_id" id="id_hipmob_app_id" type="text" value="'. get_option('hipmob_app_id') . '" />';
+    echo '<input style="width: 240px" name="hipmob_app_id" id="id_hipmob_app_id" type="text" value="'. get_option('hipmob_app_id') . '" />&nbsp;&nbsp;<a class="button" href="https://manage.hipmob.com/#apps" target="_blank">Get your Hipmob app ID</a></div>';
   }
 
   function hipmob_plugin_settings_title()
@@ -146,7 +157,15 @@ class HipmobPlugin
 
   function hipmob_plugin_section_overview()
   {
-    echo '<div>Configure the Hipmob Wordpress chat plugin by providing the application ID (from your Hipmob account) and customize the look and feel. Visit <a href="https://www.hipmob.com/documentation/integrations/wordpress.html" target="_blank">https://www.hipmob.com/documentation/integrations/wordpress.html</a> for more information.</div>';
+    echo '<div><h3>Instructions:</h3><ol>';
+    echo '<li><a class="button-primary" href="https://manage.hipmob.com/" target="_blank">Get your free Hipmob account</a> Get started: get your free Hipmob account.</li>';
+    echo '<li>Once you get your account, copy the application ID from your account into the Application ID field below.</li>';
+    echo '<li><a class="button" target="_blank" href="https://www.hipmob.com/operator#im">See instructions to talk to your visitors</a> Use any Jabber/XMPP client to talk to your visitors.</li></ol></div>';
+    echo '<div style="margin-top: 10px">Customize your chat widget: visit <a href="https://www.hipmob.com/documentation/integrations/wordpress.html" target="_blank">https://www.hipmob.com/documentation/integrations/wordpress.html</a> for more information.</div>';
+
+    echo '<div style="margin-top: 10px">Connects to popular CRM tools like Highrise, Salesforce and Zoho CRM to drive sales and conversions.</div>';
+
+    echo '<div style="margin-top: 10px"><strong>NOTE: if you use a cache plugin (such as WP Super Cache) you may need to clear your cache for changes to take effect.</strong></div>';
   }
 
   function hipmob_plugin_admin_menu()
@@ -172,6 +191,7 @@ class HipmobPlugin
     unregister_setting('hipmob-settings-group', 'hipmob_tab_background_color');
     unregister_setting('hipmob-settings-group', 'hipmob_tab_text_color');
     unregister_setting('hipmob-settings-group', 'hipmob_tab_position');
+    unregister_setting('hipmob-settings-group', 'hipmob_output_position');
   }
   
   function hipmob_plugin_settings_view()
@@ -192,9 +212,19 @@ class HipmobPlugin
     self::$active = false;
   }
 
-  function hipmob_plugin_add_chat_tab()
+  function hipmob_plugin_add_chat_tab_header()
   {
     if(!self::$active) return;
+    if(!self::$output_top) return;
+    include('hipmob-render.php');
+    $view = new HipmobWindow('hipmob', __FILE__);
+    echo $view->display();
+  }
+
+  function hipmob_plugin_add_chat_tab_footer()
+  {
+    if(!self::$active) return;
+    if(self::$output_top) return;
     include('hipmob-render.php');
     $view = new HipmobWindow('hipmob', __FILE__);
     echo $view->display();
@@ -203,9 +233,12 @@ class HipmobPlugin
   function hipmob_plugin_add_help_chat()
   {
     if(!self::$admin) return;
-
+    global $userdata;
+    get_currentuserinfo();
+    
     // add the admin chat tab
-    echo "<script type=\"text/javascript\">var _hmc = _hmc || [];_hmc.push(['app', '9e0306c589ed413bb3c0e12a7ea7591c']);_hmc.push(['settings', { 'width': '350px' }]);_hmc.push(['title', \"Help me with my Hipmob integration\"]);(function(){ var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true; hm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'hipmob.s3.amazonaws.com/hipmobchat.min.js'; var b = document.getElementsByTagName('script')[0]; b.parentNode.insertBefore(hm, b); })();</script>";
+    $name = $userdata->display_name . " (".$userdata->user_login.")";
+    echo "<script type=\"text/javascript\">var _hmc = _hmc || [];_hmc.push(['app', '9e0306c589ed413bb3c0e12a7ea7591c']);_hmc.push(['settings', { 'width': '350px', 'openonmessage': true }]);_hmc.push(['title', \"Help me with my Hipmob integration\"]);_hmc.push(['email',".json_encode(get_option('admin_email'))."]);_hmc.push(['name',".json_encode($name)."]);_hmc.push(['context', ".json_encode("Blog Name: ". get_option("blogname").";Blog URL: ". get_option("siteurl"))."]);(function(){ var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true; hm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'hipmob.s3.amazonaws.com/hipmobchat.min.js'; var b = document.getElementsByTagName('script')[0]; b.parentNode.insertBefore(hm, b); })();</script>";
   }
 }
 
