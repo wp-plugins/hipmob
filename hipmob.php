@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Hipmob
- * @version 1.4.0
+ * @version 1.5.0
  */
 /*
 Plugin Name: Hipmob
 Plugin URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 Description: Adds a Hipmob live chat tab to your website. Use the [hipmob_enabled] and [hipmob_disabled] shortcodes to control the display on each page.
 Author: Orthogonal Labs, Inc
-Version: 1.4.0
+Version: 1.5.0
 Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 */
 /*  Copyright 2012 Femi Omojola (email : femi@hipmob.com)
@@ -31,7 +31,7 @@ if(!function_exists('add_action')){
   exit;
 }
 
-define('HIPMOB_FOR_WORDPRESS_VERSION', '1.4.0');
+define('HIPMOB_FOR_WORDPRESS_VERSION', '1.5.0');
 
 class HipmobPlugin
 {
@@ -51,6 +51,7 @@ class HipmobPlugin
     add_option('hipmob_window_text_color');
     add_option('hipmob_tab_position');
     add_option('hipmob_output_position');
+    add_option('hipmob_theme');
 
     // add us to the footer
     add_action('wp_footer', array(__CLASS__, "hipmob_plugin_add_chat_tab_footer"), 100);
@@ -93,6 +94,7 @@ class HipmobPlugin
     add_settings_field('hipmob_title', 'Hipmob Window Title', array(__CLASS__, 'hipmob_plugin_settings_title'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_window_width', 'Hipmob Window Width', array(__CLASS__, 'hipmob_plugin_settings_window_width'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_window_height', 'Hipmob Window Height', array(__CLASS__, 'hipmob_plugin_settings_window_height'), 'hipmob-settings-group', 'hipmob_settings_section');
+    add_settings_field('hipmob_theme', 'Theme', array(__CLASS__, 'hipmob_plugin_settings_theme'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_tab_background_color', 'Tab Background Color', array(__CLASS__, 'hipmob_plugin_settings_tab_background_color'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_tab_text_color', 'Tab Text Color', array(__CLASS__, 'hipmob_plugin_settings_tab_text_color'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_tab_position', 'Tab Position', array(__CLASS__, 'hipmob_plugin_settings_tab_position'), 'hipmob-settings-group', 'hipmob_settings_section');
@@ -103,6 +105,7 @@ class HipmobPlugin
     register_setting('hipmob-settings-group', 'hipmob_title');
     register_setting('hipmob-settings-group', 'hipmob_window_width');
     register_setting('hipmob-settings-group', 'hipmob_window_height');
+    register_setting('hipmob-settings-group', 'hipmob_theme');
     register_setting('hipmob-settings-group', 'hipmob_tab_background_color');
     register_setting('hipmob-settings-group', 'hipmob_tab_text_color');
     register_setting('hipmob-settings-group', 'hipmob_tab_position');
@@ -152,7 +155,13 @@ class HipmobPlugin
   function hipmob_plugin_settings_tab_position()
   {
     $opt = get_option('hipmob_tab_position');
-    echo '<select id="id_hipmob_tab_position" name="hipmob_tab_position"><option value="bottomright" '. selected('bottomright', $opt, false).'>Bottom Right</option><option value="bottomcenter" '. selected('bottomcenter', $opt, false).'>Bottom Center</option><option value="bottomleft" '. selected('bottomleft', $opt, false).'>Bottom Left</option><option value="topright" '. selected('topright', $opt, false).'>Top Right</option><option value="topcenter" '. selected('topcenter', $opt, false).'>Top Center</option><option value="topleft" '. selected('topleft', $opt, false).'>Top Left</option></select>';
+    echo '<select id="id_hipmob_tab_position" name="hipmob_tab_position"><option style="padding-right: 5px" value="bottomright" '. selected('bottomright', $opt, false).'>Bottom Right</option><option style="padding-right: 5px" value="bottomcenter" '. selected('bottomcenter', $opt, false).'>Bottom Center</option><option style="padding-right: 5px" value="bottomleft" '. selected('bottomleft', $opt, false).'>Bottom Left</option><option style="padding-right: 5px" value="topright" '. selected('topright', $opt, false).'>Top Right</option><option style="padding-right: 5px" value="topcenter" '. selected('topcenter', $opt, false).'>Top Center</option><option style="padding-right: 5px" value="topleft" '. selected('topleft', $opt, false).'>Top Left</option></select>';
+  }
+
+  function hipmob_plugin_settings_theme()
+  {
+    $opt = get_option('hipmob_theme');
+    echo '<select id="id_hipmob_theme" name="hipmob_theme"><option style="padding-right: 5px"  value="" '.selected('', $opt, false).'></option><option style="padding-right: 5px" value="gmail" '. selected('gmail', $opt, false).'>Gmail</option><option style="padding-right: 5px" value="fb" '. selected('fb', $opt, false).'>Facebook</option><option style="padding-right: 5px" value="fbactive" '. selected('fbactive', $opt, false).'>Facebook Active</option></select>';
   }
 
   function hipmob_plugin_section_overview()
@@ -165,7 +174,7 @@ class HipmobPlugin
 
     echo '<div style="margin-top: 10px">Connects to popular CRM tools like Highrise, Salesforce and Zoho CRM to drive sales and conversions.</div>';
 
-    echo '<div style="margin-top: 10px"><strong>NOTE: if you use a cache plugin (such as WP Super Cache) you may need to clear your cache for changes to take effect.</strong></div>';
+    echo '<div style="margin-top: 10px"><strong>NOTE: if you use a cache plugin (such as WP Super Cache) you may need to clear your cache for your changes to take effect.</strong></div>';
   }
 
   function hipmob_plugin_admin_menu()
@@ -188,6 +197,7 @@ class HipmobPlugin
     unregister_setting('hipmob-settings-group', 'hipmob_title');
     unregister_setting('hipmob-settings-group', 'hipmob_window_width');
     unregister_setting('hipmob-settings-group', 'hipmob_window_height');
+    unregister_setting('hipmob-settings-group', 'hipmob_theme');
     unregister_setting('hipmob-settings-group', 'hipmob_tab_background_color');
     unregister_setting('hipmob-settings-group', 'hipmob_tab_text_color');
     unregister_setting('hipmob-settings-group', 'hipmob_tab_position');

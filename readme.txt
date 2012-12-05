@@ -4,7 +4,7 @@ Donate link:
 Tags: live chat, admin, administration, Chat, control, custom, edit, plugin, profile, panel, interface, wordpress, help, support, widget, operator, mobile, jabber, xmpp, imo, instantbird, adium, ichat, pidgin, xabber, live help, live support, social, chat bot, notification, salesforce, zendesk, desk.com, highrise, zoho, customer support, campfire, hipchat, parse, mailchimp, square space, weebly, bot, iphone, android, facebook, customer help, analytics, email, happiness, happy visitors, happy customers, increase sales, conversions, jquery, customer retention, php, python, nodejs, commerce, black friday, cyber monday, ipad, business, api, ruby, java, hosted, helpdesk, help, leads, crm, visitor tracking, social, talk, messaging, e-commerce, mobile-commerce, live chat service, wordpress chat, wordpress help, chat plugin, site chat, help chat, IM, contact us, user feedback, web help, help tickets, chat tab, visitor stats, visitor tracking, customer stats, customer tracking, visitor chat, customer chat
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,7 +42,7 @@ Hipmob's live chat service comes with a ton of features, including:
 - Chat from your mobile phone! Using the IMO instant messaging client.
 - Email to reply to customers who are away
 - Analytics right in your Google Analytics or Mixpanel Account
-- Easy to customize the UI
+- Easy to customize the UI: choose themes from the plugin settings.
 - Manage multiple sites
 - See visitors on your site in real time
 - Send proactive chat messages
@@ -80,6 +80,9 @@ Yes! Hipmob live chat integrates with a growing number of tools you may already 
 2. Hipmob live chat settings page.
 
 == Changelog ==
+
+= 1.5.0 =
+Added theme selection options.
 
 = 1.4.0 =
 Updated the readme and added additional help to the settings page.
