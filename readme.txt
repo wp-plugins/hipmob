@@ -1,10 +1,10 @@
 === Hipmob ===
 Contributors: hipmob
 Donate link: 
-Tags: live chat, admin, administration, Chat, control, custom, edit, plugin, profile, panel, interface, wordpress, help, support, widget, operator, mobile, jabber, xmpp, imo, instantbird, adium, ichat, pidgin, xabber, live help, live support, social, chat bot, notification, salesforce, zendesk, desk.com, highrise, zoho, customer support, campfire, hipchat, parse, mailchimp, square space, weebly, bot, iphone, android, facebook, customer help, analytics, email, happiness, happy visitors, happy customers, increase sales, conversions, jquery, customer retention, php, python, nodejs, commerce, black friday, cyber monday, ipad, business, api, ruby, java, hosted, helpdesk, help, leads, crm, visitor tracking, social, talk, messaging, e-commerce, mobile-commerce, live chat service, wordpress chat, wordpress help, chat plugin, site chat, help chat, IM, contact us, user feedback, web help, help tickets, chat tab, visitor stats, visitor tracking, customer stats, customer tracking, visitor chat, customer chat
+Tags:  37signals, API, Chat, Facebook chat, IM, Instant messaging, Node.JS, PHP, Python, adium, admin, administration, analytics, android, api, black friday, bot, business, campfire, chat, chat bot, chat plugin, chat tab, chat widget, chrome, co-browsing, commerce, contact us, control, conversions, crm, custom, customer chat, customer help, customer retention, customer stats, customer support, customer tracking, cyber monday, desk.com, e-commerce, edit, email, facebook, firefox, free chat, google, happiness, happy customers, happy visitors, help, help chat, help desk, help tickets, helpdesk, high-rise, highrise, hipchat, hockey app, hosted, iMessage, iPad, iPhone, ichat, imo, increase sales, instantbird, interface, internet explorer, ipad, iphone, jabber, java, jquery, leads, live chat, live chat service, live help, live support, mail chimp, mailchimp, marketing, messaging, mixpanel, mobile, mobile-commerce, nodejs, notification, opera, operator, panel, parse, php, pidgin, plugin, profile, python, real time, real-time chat, rest api, ruby, safari, sales, salesforce, screenshare, screensharing, site chat, social, square space, support, support chat, talk, ticketing, user chat, user feedback, visitor chat, visitor feedback, visitor stats, visitor tracking, web chat, web help, website chat, weebly, widget, wordpress, wordpress chat, wordpress help, wordpress plugin, xabber, xmpp, zendesk, zohocrm, zoho
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,8 @@ Hipmob's live chat service comes with a ton of features, including:
 - Works with all browsers Internet Explorer, Firefox, Chrome, Opera and Safari
 - Works on mobile browsers as well
 - SDKs for your iPhone app, Android app or iPad app
+- Web based chat client: no install necessary, get started chatting with your users immediately
+- Integrates with Google Chat: get instant messages everytime a user wants to chat!
 - Integrates with Mailchimp if you want to send newsletters
 - Integrates with Helpdesk systems like Zendesk and Desk.com
 - Plugs into CRM tools like Highrise by 37Signals, Zoho CRM, and Salesforce
@@ -80,6 +82,9 @@ Yes! Hipmob live chat integrates with a growing number of tools you may already 
 2. Hipmob live chat settings page.
 
 == Changelog ==
+
+= 1.6.0 =
+Streamlined the signup process: added support for registering directly from the Settings page.
 
 = 1.5.0 =
 Added theme selection options.

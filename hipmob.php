@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Hipmob
- * @version 1.5.0
+ * @version 1.6.0
  */
 /*
 Plugin Name: Hipmob
 Plugin URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 Description: Adds a Hipmob live chat tab to your website. Use the [hipmob_enabled] and [hipmob_disabled] shortcodes to control the display on each page.
 Author: Orthogonal Labs, Inc
-Version: 1.5.0
+Version: 1.6.0
 Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 */
 /*  Copyright 2012 Femi Omojola (email : femi@hipmob.com)
@@ -31,7 +31,7 @@ if(!function_exists('add_action')){
   exit;
 }
 
-define('HIPMOB_FOR_WORDPRESS_VERSION', '1.5.0');
+define('HIPMOB_FOR_WORDPRESS_VERSION', '1.6.0');
 
 class HipmobPlugin
 {
@@ -69,6 +69,7 @@ class HipmobPlugin
       add_filter('plugin_action_links', array(__CLASS__, 'hipmob_plugin_action_links'), 10, 2);
       register_deactivation_hook(plugin_basename( dirname(__FILE__).'/hipmob.php' ), array(__CLASS__, 'hipmob_plugin_deactivation_hook'));
       add_action('admin_footer', array(__CLASS__, "hipmob_plugin_add_help_chat"), 100);
+      add_action('admin_enqueue_scripts', array(__CLASS__, 'hipmob_queue_admin_scripts'));
     }
   }
   
@@ -77,6 +78,16 @@ class HipmobPlugin
     echo '<div id="hipmob_version_warning" class="updated fade"><p><strong>'.sprintf(__('Hipmob %s requires WordPress 3.0 or higher.'), HIPMOB_FOR_WORDPRESS_VERSION) .'</strong></p></div>';
   }
   
+  function hipmob_queue_admin_scripts()
+  {
+    wp_enqueue_script ('hipmob-modal' ,       // handle
+		       plugins_url('/hipmob.js', __FILE__),       // source
+		       array('jquery-ui-dialog')); // dependencies
+  
+    // A style available in WP               
+    wp_enqueue_style (  'wp-jquery-ui-dialog');
+  }
+
   function hipmob_plugin_admin_init()
   {
     global $wp_version;
@@ -124,7 +135,7 @@ class HipmobPlugin
 
   function hipmob_plugin_settings_app_id()
   {
-    echo '<input style="width: 240px" name="hipmob_app_id" id="id_hipmob_app_id" type="text" value="'. get_option('hipmob_app_id') . '" />&nbsp;&nbsp;<a class="button" href="https://manage.hipmob.com/#apps" target="_blank">Get your Hipmob app ID</a></div>';
+    echo '<input style="width: 240px" name="hipmob_app_id" id="id_hipmob_app_id" type="text" value="'. get_option('hipmob_app_id') . '" />&nbsp;&nbsp;<a id="hipmob_get_appid" style="display: none" class="button-primary">Get your Hipmob app ID</a></div>';
   }
 
   function hipmob_plugin_settings_title()
@@ -167,9 +178,8 @@ class HipmobPlugin
   function hipmob_plugin_section_overview()
   {
     echo '<div><h3>Instructions:</h3><ol>';
-    echo '<li><a class="button-primary" href="https://manage.hipmob.com/" target="_blank">Get your free Hipmob account</a> Get started: get your free Hipmob account.</li>';
-    echo '<li>Once you get your account, copy the application ID from your account into the Application ID field below.</li>';
-    echo '<li><a class="button" target="_blank" href="https://www.hipmob.com/operator#im">See instructions to talk to your visitors</a> Use any Jabber/XMPP client to talk to your visitors.</li></ol></div>';
+    echo '<li>Click the Get your Hipmob app ID button to register for your free Hipmob account and complete the setup of your Hipmob live chat plugin.</li>';
+    echo '<li>You can instantly start talking to your visitors <a class="button" target="_blank" href="https://manage.hipmob.com/console">using our browser chat client</a> or <a class="button" target="_blank" href="https://www.hipmob.com/operator#im">using any Jabber/XMPP client</a>.</li></ol></div>';
     echo '<div style="margin-top: 10px">Customize your chat widget: visit <a href="https://www.hipmob.com/documentation/integrations/wordpress.html" target="_blank">https://www.hipmob.com/documentation/integrations/wordpress.html</a> for more information.</div>';
 
     echo '<div style="margin-top: 10px">Connects to popular CRM tools like Highrise, Salesforce and Zoho CRM to drive sales and conversions.</div>';
@@ -247,8 +257,11 @@ class HipmobPlugin
     get_currentuserinfo();
     
     // add the admin chat tab
+    $url = "hipmob.s3.amazonaws.com/hipmobchat.min.js";
+    $appid = "9e0306c589ed413bb3c0e12a7ea7591c";
+
     $name = $userdata->display_name . " (".$userdata->user_login.")";
-    echo "<script type=\"text/javascript\">var _hmc = _hmc || [];_hmc.push(['app', '9e0306c589ed413bb3c0e12a7ea7591c']);_hmc.push(['settings', { 'width': '350px', 'openonmessage': true }]);_hmc.push(['title', \"Help me with my Hipmob integration\"]);_hmc.push(['email',".json_encode(get_option('admin_email'))."]);_hmc.push(['name',".json_encode($name)."]);_hmc.push(['context', ".json_encode("Blog Name: ". get_option("blogname").";Blog URL: ". get_option("siteurl"))."]);(function(){ var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true; hm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'hipmob.s3.amazonaws.com/hipmobchat.min.js'; var b = document.getElementsByTagName('script')[0]; b.parentNode.insertBefore(hm, b); })();</script>";
+    echo "<script type=\"text/javascript\">var _hmc = _hmc || [];_hmc.push(['app', ".json_encode($appid)."]);_hmc.push(['settings', { 'width': '350px', 'openonmessage': true }]);_hmc.push(['title', \"Help me with my Hipmob integration\"]);_hmc.push(['email',".json_encode(get_option('admin_email'))."]);_hmc.push(['name',".json_encode($name)."]);_hmc.push(['context', ".json_encode("Blog Name: ". get_option("blogname").";Blog URL: ". get_option("siteurl"))."]);_hmc.push(['settings', { 'notify': ['json'] }]); (function(){ var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true; hm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + ".json_encode($url)."; var b = document.getElementsByTagName('script')[0]; b.parentNode.insertBefore(hm, b); })();</script>";
   }
 }
 
