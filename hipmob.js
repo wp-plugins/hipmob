@@ -38,14 +38,16 @@ jQuery(function($) {
     var complete_link = function()
     {
 	if(window.hipmob){
-	    window.hipmob.on('jsonmessagereceived', function(self, from, data, props){
-		if('linktarget' in data){
-		    linktarget = data.linktarget;
-		    btn.show();
-		}else if('choice' in data){
-		    use_app_id(data.choice);
-		}
-	    });
+	    if('on' in window.hipmob){
+		window.hipmob.on('jsonmessagereceived', function(self, from, data, props){
+		    if('linktarget' in data){
+			linktarget = data.linktarget;
+			btn.show();
+		    }else if('choice' in data){
+			use_app_id(data.choice);
+		    }
+		});
+	    }
 	    return;
 	}
 	setTimeout(complete_link, 2000);
