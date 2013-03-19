@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Hipmob
- * @version 1.6.0
+ * @version 1.7.0
  */
 /*
 Plugin Name: Hipmob
 Plugin URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 Description: Adds a Hipmob live chat tab to your website. Use the [hipmob_enabled] and [hipmob_disabled] shortcodes to control the display on each page.
 Author: Orthogonal Labs, Inc
-Version: 1.6.0
+Version: 1.7.0
 Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 */
 /*  Copyright 2012 Femi Omojola (email : femi@hipmob.com)
@@ -31,7 +31,7 @@ if(!function_exists('add_action')){
   exit;
 }
 
-define('HIPMOB_FOR_WORDPRESS_VERSION', '1.6.0');
+define('HIPMOB_FOR_WORDPRESS_VERSION', '1.7.0');
 
 class HipmobPlugin
 {
@@ -45,6 +45,8 @@ class HipmobPlugin
     add_option('hipmob_enabled');
     add_option('hipmob_app_id');
     add_option('hipmob_title');
+    add_option('hipmob_userlabel');
+    add_option('hipmob_placeholder');
     add_option('hipmob_window_width');
     add_option('hipmob_window_height');
     add_option('hipmob_window_background_color');
@@ -103,6 +105,8 @@ class HipmobPlugin
     add_settings_field('hipmob_enabled', 'Enabled', array(__CLASS__, 'hipmob_plugin_settings_enabled'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_app_id', 'Hipmob Application ID', array(__CLASS__, 'hipmob_plugin_settings_app_id'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_title', 'Hipmob Window Title', array(__CLASS__, 'hipmob_plugin_settings_title'), 'hipmob-settings-group', 'hipmob_settings_section');
+    add_settings_field('hipmob_userlabel', 'Hipmob Default User Label', array(__CLASS__, 'hipmob_plugin_settings_userlabel'), 'hipmob-settings-group', 'hipmob_settings_section');
+    add_settings_field('hipmob_placeholder', 'Hipmob Input Placeholder Text', array(__CLASS__, 'hipmob_plugin_settings_placeholder'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_window_width', 'Hipmob Window Width', array(__CLASS__, 'hipmob_plugin_settings_window_width'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_window_height', 'Hipmob Window Height', array(__CLASS__, 'hipmob_plugin_settings_window_height'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_theme', 'Theme', array(__CLASS__, 'hipmob_plugin_settings_theme'), 'hipmob-settings-group', 'hipmob_settings_section');
@@ -114,6 +118,8 @@ class HipmobPlugin
     register_setting('hipmob-settings-group', 'hipmob_enabled');
     register_setting('hipmob-settings-group', 'hipmob_app_id');
     register_setting('hipmob-settings-group', 'hipmob_title');
+    register_setting('hipmob-settings-group', 'hipmob_userlabel');
+    register_setting('hipmob-settings-group', 'hipmob_placeholder');
     register_setting('hipmob-settings-group', 'hipmob_window_width');
     register_setting('hipmob-settings-group', 'hipmob_window_height');
     register_setting('hipmob-settings-group', 'hipmob_theme');
@@ -141,6 +147,16 @@ class HipmobPlugin
   function hipmob_plugin_settings_title()
   {
     echo '<input style="width: 400px" name="hipmob_title" id="id_hipmob_title" type="text" value="'. get_option('hipmob_title') . '" placeholder="Talk to us." />';
+  }
+
+  function hipmob_plugin_settings_userlabel()
+  {
+    echo '<input style="width: 400px" name="hipmob_userlabel" id="id_hipmob_userlabel" type="text" value="'. get_option('hipmob_userlabel') . '" placeholder="Me" />';
+  }
+
+  function hipmob_plugin_settings_placeholder()
+  {
+    echo '<input style="width: 400px" name="hipmob_placeholder" id="id_hipmob_placeholder" type="text" value="'. get_option('hipmob_placeholder') . '" placeholder="Send us a message" />';
   }
 
   function hipmob_plugin_settings_window_width()
@@ -205,6 +221,8 @@ class HipmobPlugin
     unregister_setting('hipmob-settings-group', 'hipmob_enabled');
     unregister_setting('hipmob-settings-group', 'hipmob_app_id');
     unregister_setting('hipmob-settings-group', 'hipmob_title');
+    unregister_setting('hipmob-settings-group', 'hipmob_userlabel');
+    unregister_setting('hipmob-settings-group', 'hipmob_placeholder');
     unregister_setting('hipmob-settings-group', 'hipmob_window_width');
     unregister_setting('hipmob-settings-group', 'hipmob_window_height');
     unregister_setting('hipmob-settings-group', 'hipmob_theme');

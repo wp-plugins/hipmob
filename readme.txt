@@ -3,8 +3,8 @@ Contributors: hipmob
 Donate link: 
 Tags:  37signals, API, Chat, Facebook chat, IM, Instant messaging, Node.JS, PHP, Python, adium, admin, administration, analytics, android, api, black friday, bot, business, campfire, chat, chat bot, chat plugin, chat tab, chat widget, chrome, co-browsing, commerce, contact us, control, conversions, crm, custom, customer chat, customer help, customer retention, customer stats, customer support, customer tracking, cyber monday, desk.com, e-commerce, edit, email, facebook, firefox, free chat, google, happiness, happy customers, happy visitors, help, help chat, help desk, help tickets, helpdesk, high-rise, highrise, hipchat, hockey app, hosted, iMessage, iPad, iPhone, ichat, imo, increase sales, instantbird, interface, internet explorer, ipad, iphone, jabber, java, jquery, leads, live chat, live chat service, live help, live support, mail chimp, mailchimp, marketing, messaging, mixpanel, mobile, mobile-commerce, nodejs, notification, opera, operator, panel, parse, php, pidgin, plugin, profile, python, real time, real-time chat, rest api, ruby, safari, sales, salesforce, screenshare, screensharing, site chat, social, square space, support, support chat, talk, ticketing, user chat, user feedback, visitor chat, visitor feedback, visitor stats, visitor tracking, web chat, web help, website chat, weebly, widget, wordpress, wordpress chat, wordpress help, wordpress plugin, xabber, xmpp, zendesk, zohocrm, zoho
 Requires at least: 3.0
-Tested up to: 3.4
-Stable tag: 1.6.0
+Tested up to: 3.5.1
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,12 @@ Yes! Hipmob live chat integrates with a growing number of tools you may already 
 2. Hipmob live chat settings page.
 
 == Changelog ==
+
+= 1.7.0 =
+Additional localization support: configure the default user text and the placeholder for the text area. This allows full language customization of the default experience. Pre-chat form localization coming soon.
+
+= 1.6.1 =
+Minor JS bug fix.
 
 = 1.6.0 =
 Streamlined the signup process: added support for registering directly from the Settings page.
