@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Hipmob
- * @version 1.6.0
+ * @version 1.7.5
  */
 /*
 Plugin Name: Hipmob
 Plugin URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 Description: Adds a Hipmob live chat tab to your website. Use the [hipmob_enabled] and [hipmob_disabled] shortcodes to control the display on each page.
 Author: Orthogonal Labs, Inc
-Version: 1.6.0
+Version: 1.7.5
 Author URI: https://www.hipmob.com/documentation/integrations/wordpress.html
 */
 /*  Copyright 2012 Femi Omojola (email : femi@hipmob.com)
@@ -31,7 +31,7 @@ if(!function_exists('add_action')){
   exit;
 }
 
-define('HIPMOB_FOR_WORDPRESS_VERSION', '1.6.0');
+define('HIPMOB_FOR_WORDPRESS_VERSION', '1.7.5');
 
 class HipmobPlugin
 {
@@ -45,6 +45,8 @@ class HipmobPlugin
     add_option('hipmob_enabled');
     add_option('hipmob_app_id');
     add_option('hipmob_title');
+    add_option('hipmob_userlabel');
+    add_option('hipmob_placeholder');
     add_option('hipmob_window_width');
     add_option('hipmob_window_height');
     add_option('hipmob_window_background_color');
@@ -52,6 +54,7 @@ class HipmobPlugin
     add_option('hipmob_tab_position');
     add_option('hipmob_output_position');
     add_option('hipmob_theme');
+    add_option('hipmob_tab_offset');
 
     // add us to the footer
     add_action('wp_footer', array(__CLASS__, "hipmob_plugin_add_chat_tab_footer"), 100);
@@ -103,6 +106,8 @@ class HipmobPlugin
     add_settings_field('hipmob_enabled', 'Enabled', array(__CLASS__, 'hipmob_plugin_settings_enabled'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_app_id', 'Hipmob Application ID', array(__CLASS__, 'hipmob_plugin_settings_app_id'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_title', 'Hipmob Window Title', array(__CLASS__, 'hipmob_plugin_settings_title'), 'hipmob-settings-group', 'hipmob_settings_section');
+    add_settings_field('hipmob_userlabel', 'Hipmob Default User Label', array(__CLASS__, 'hipmob_plugin_settings_userlabel'), 'hipmob-settings-group', 'hipmob_settings_section');
+    add_settings_field('hipmob_placeholder', 'Hipmob Input Placeholder Text', array(__CLASS__, 'hipmob_plugin_settings_placeholder'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_window_width', 'Hipmob Window Width', array(__CLASS__, 'hipmob_plugin_settings_window_width'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_window_height', 'Hipmob Window Height', array(__CLASS__, 'hipmob_plugin_settings_window_height'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_theme', 'Theme', array(__CLASS__, 'hipmob_plugin_settings_theme'), 'hipmob-settings-group', 'hipmob_settings_section');
@@ -110,10 +115,14 @@ class HipmobPlugin
     add_settings_field('hipmob_tab_text_color', 'Tab Text Color', array(__CLASS__, 'hipmob_plugin_settings_tab_text_color'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_tab_position', 'Tab Position', array(__CLASS__, 'hipmob_plugin_settings_tab_position'), 'hipmob-settings-group', 'hipmob_settings_section');
     add_settings_field('hipmob_output_position', 'Add Widget to Page Header', array(__CLASS__, 'hipmob_plugin_settings_output_position'), 'hipmob-settings-group', 'hipmob_settings_section');
+    add_settings_field('hipmob_tab_offset', 'Tab Position Offset', array(__CLASS__, 'hipmob_plugin_settings_tab_offset'), 'hipmob-settings-group', 'hipmob_settings_section');
+
 
     register_setting('hipmob-settings-group', 'hipmob_enabled');
     register_setting('hipmob-settings-group', 'hipmob_app_id');
     register_setting('hipmob-settings-group', 'hipmob_title');
+    register_setting('hipmob-settings-group', 'hipmob_userlabel');
+    register_setting('hipmob-settings-group', 'hipmob_placeholder');
     register_setting('hipmob-settings-group', 'hipmob_window_width');
     register_setting('hipmob-settings-group', 'hipmob_window_height');
     register_setting('hipmob-settings-group', 'hipmob_theme');
@@ -121,6 +130,7 @@ class HipmobPlugin
     register_setting('hipmob-settings-group', 'hipmob_tab_text_color');
     register_setting('hipmob-settings-group', 'hipmob_tab_position');
     register_setting('hipmob-settings-group', 'hipmob_output_position');
+    register_setting('hipmob-settings-group', 'hipmob_tab_offset');
   }
   
   function hipmob_plugin_settings_enabled()
@@ -141,6 +151,16 @@ class HipmobPlugin
   function hipmob_plugin_settings_title()
   {
     echo '<input style="width: 400px" name="hipmob_title" id="id_hipmob_title" type="text" value="'. get_option('hipmob_title') . '" placeholder="Talk to us." />';
+  }
+
+  function hipmob_plugin_settings_userlabel()
+  {
+    echo '<input style="width: 400px" name="hipmob_userlabel" id="id_hipmob_userlabel" type="text" value="'. get_option('hipmob_userlabel') . '" placeholder="Me" />';
+  }
+
+  function hipmob_plugin_settings_placeholder()
+  {
+    echo '<input style="width: 400px" name="hipmob_placeholder" id="id_hipmob_placeholder" type="text" value="'. get_option('hipmob_placeholder') . '" placeholder="Send us a message" />';
   }
 
   function hipmob_plugin_settings_window_width()
@@ -167,6 +187,11 @@ class HipmobPlugin
   {
     $opt = get_option('hipmob_tab_position');
     echo '<select id="id_hipmob_tab_position" name="hipmob_tab_position"><option style="padding-right: 5px" value="bottomright" '. selected('bottomright', $opt, false).'>Bottom Right</option><option style="padding-right: 5px" value="bottomcenter" '. selected('bottomcenter', $opt, false).'>Bottom Center</option><option style="padding-right: 5px" value="bottomleft" '. selected('bottomleft', $opt, false).'>Bottom Left</option><option style="padding-right: 5px" value="topright" '. selected('topright', $opt, false).'>Top Right</option><option style="padding-right: 5px" value="topcenter" '. selected('topcenter', $opt, false).'>Top Center</option><option style="padding-right: 5px" value="topleft" '. selected('topleft', $opt, false).'>Top Left</option></select>';
+  }
+
+  function hipmob_plugin_settings_tab_offset()
+  {
+    echo '<input style="width: 75px" name="hipmob_tab_offset" id="id_hipmob_tab_offset" type="text" value="'. get_option('hipmob_tab_offset') . '" placeholder="100" /> px';
   }
 
   function hipmob_plugin_settings_theme()
@@ -205,6 +230,8 @@ class HipmobPlugin
     unregister_setting('hipmob-settings-group', 'hipmob_enabled');
     unregister_setting('hipmob-settings-group', 'hipmob_app_id');
     unregister_setting('hipmob-settings-group', 'hipmob_title');
+    unregister_setting('hipmob-settings-group', 'hipmob_userlabel');
+    unregister_setting('hipmob-settings-group', 'hipmob_placeholder');
     unregister_setting('hipmob-settings-group', 'hipmob_window_width');
     unregister_setting('hipmob-settings-group', 'hipmob_window_height');
     unregister_setting('hipmob-settings-group', 'hipmob_theme');
@@ -212,6 +239,7 @@ class HipmobPlugin
     unregister_setting('hipmob-settings-group', 'hipmob_tab_text_color');
     unregister_setting('hipmob-settings-group', 'hipmob_tab_position');
     unregister_setting('hipmob-settings-group', 'hipmob_output_position');
+    unregister_setting('hipmob-settings-group', 'hipmob_tab_offset');
   }
   
   function hipmob_plugin_settings_view()

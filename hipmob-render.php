@@ -28,10 +28,19 @@ class HipmobWindow
     $tab = array();
     $opt = get_option('hipmob_window_width'); if($opt) $settings['width'] = intval(trim($opt));
     $opt = get_option('hipmob_window_height'); if($opt) $settings['height'] = intval(trim($opt));
-    
+
+    // userlabel
+    $opt = get_option('hipmob_userlabel'); if($opt) $settings['userlabel'] = trim($opt);
+
+    // placeholder
+    $opt = get_option('hipmob_placeholder'); if($opt) $settings['placeholder'] = trim($opt);
+
     // position
     $opt = get_option('hipmob_tab_position'); if($opt) $settings['position'] = trim($opt);
     
+    // tab offset
+    $opt = get_option('hipmob_tab_offset'); if($opt) $settings['offset'] = intval(trim($opt));
+
     $opt = get_option('hipmob_theme');
     if($opt == "gmail"){
       $tab['background-color'] = '#222222'; $tab['color'] = '#FFFFFF'; $tab['font-size'] = '12px'; $tab['font-weight'] = 'bold';
