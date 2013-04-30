@@ -47,10 +47,12 @@ jQuery(function($) {
 			use_app_id(data.choice);
 		    }
 		});
+	    }else{
+		setTimeout(complete_link, 100);
 	    }
 	    return;
 	}
-	setTimeout(complete_link, 2000);
+	setTimeout(complete_link, 100);
     };
     
     var btn = jQuery("#hipmob_get_appid");
