@@ -38,17 +38,21 @@ jQuery(function($) {
     var complete_link = function()
     {
 	if(window.hipmob){
-	    window.hipmob.on('jsonmessagereceived', function(self, from, data, props){
-		if('linktarget' in data){
-		    linktarget = data.linktarget;
-		    btn.show();
-		}else if('choice' in data){
-		    use_app_id(data.choice);
-		}
-	    });
+	    if('on' in window.hipmob){
+		window.hipmob.on('jsonmessagereceived', function(self, from, data, props){
+		    if('linktarget' in data){
+			linktarget = data.linktarget;
+			btn.show();
+		    }else if('choice' in data){
+			use_app_id(data.choice);
+		    }
+		});
+	    }else{
+		setTimeout(complete_link, 100);
+	    }
 	    return;
 	}
-	setTimeout(complete_link, 2000);
+	setTimeout(complete_link, 100);
     };
     
     var btn = jQuery("#hipmob_get_appid");
